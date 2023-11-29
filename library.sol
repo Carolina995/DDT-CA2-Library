@@ -13,4 +13,8 @@ contract Library {
    contructor() {
         librarian = msg.sender;
     }
-    
+
+function addBook(uint _id, string memory _title) public {
+        require(msg.sender == librarian, "Only the librarian can add books.");
+        books[_id] = Book(_title, address(0));
+    }
