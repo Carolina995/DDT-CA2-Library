@@ -19,6 +19,12 @@ function addBook(uint _id, string memory _title) public {
         books[_id] = Book(_title, address(0));
     }
 
+function returnBook(uint _id) public {
+        require(books[_id].currentHolder == msg.sender, "You can't return a book that you didn't borrow.");
+        books[_id].currentHolder = address(0);
+    }
+} 
+
  function borrowBook(uint _id) public {
         require(books[_id].currentHolder == address(0), "This book is currently borrowed by someone else.");
         books[_id].currentHolder = msg.sender;
